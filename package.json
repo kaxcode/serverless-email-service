@@ -15,5 +15,14 @@
   "bugs": {
     "url": "https://github.com/kaxcode/serverless-email-service/issues"
   },
-  "homepage": "https://github.com/kaxcode/serverless-email-service#readme"
+  "homepage": "https://github.com/kaxcode/serverless-email-service#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "serverless-http": "^1.9.1"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.433.0",
+    "serverless-offline": "^4.9.3"
+  }
 }
