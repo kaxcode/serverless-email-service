@@ -16,20 +16,21 @@ app.get("/", (req, res) => {
 });
 
 /**
- * Create a new SES Template based on the request data
+ * Send Email via AWS SES using the request Template and data
  */
-app.post("/template", (req, res) => {
-  const { templateName, subject, body } = req.body;
+app.post("/send-email", (req, res) => {
+  const { templateName, sendTo, data } = req.body;
 
-  var params = {
-    Template: {
-      TemplateName: templateName,
-      HtmlPart: body,
-      SubjectPart: subject
-    }
+  const params = {
+    Template: templateName,
+    Destination: {
+      ToAddresses: [sendTo]
+    },
+    Source: "", // use the SES domain or email verified in your account
+    TemplateData: JSON.stringify(data || {})
   };
 
-  ses.createTemplate(params, (err, data) => {
+  ses.sendTemplatedEmail(params, (err, data) => {
     if (err) {
       res.send(err);
     } else {
